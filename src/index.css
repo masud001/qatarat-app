@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #222222;
+  --theme-border-color: rgba(101, 53, 138, 0.15);
+  --active-text-color: #66358c;
+  --theme-color: var(--active-text-color);
+  --button-bg-color: #2b153c;
+  --page-title-line-height: 48px;
+  --font-family: "Open Sauce Sans", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif;
+
+  /* Product Card Colors */
+  --product-card-bg: #f5f2f8;
+  --product-card-border: #e5e7eb;
+  --product-name-color: #222222;
+  --product-name-hover: #66358c;
+  --product-details-color: #616161;
+  --product-price-color: #222222;
+  --add-to-cart-bg: #4c4c4c;
+  --add-to-cart-hover: #222222;
+  --add-to-cart-text: #ffffff;
+}
+
+[data-theme="dark"] {
+  --background-color: #000000;
+  --text-color: #ffffff;
+}
+
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+@font-face {
+  font-family: "Open Sauce Sans";
+  src: url("/fonts/OpenSauceSans-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Open Sauce Sans";
+  src: url("/fonts/OpenSauceSans-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sauce One Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/OpenSauceOne-Medium.woff") format("woff");
+}
+
+html,
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  font-family: var(--font-family);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.nav-link.active {
+  position: relative;
+  color: var(--active-text-color);
+  font-weight: 700;
+}
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: var(--active-text-color);
+  border-radius: 50%;
+  transition: width 0.3s ease, height 0.3s ease;
+  transform: translate(-50%, 50%);
+}
+
+.slider-button-style {
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.my-swiper-bullet {
+  @apply w-2 h-2 rounded-full bg-[#65358a] mx-1 inline-block transition-all;
+}
+.swiper-pagination-bullet-active.my-swiper-bullet {
+  @apply bg-(--active-text-color) scale-125 w-8 h-2 rounded-lg;
+}
+
+.footer-box-shadow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: solid 1px rgba(101, 53, 138, 0.08);
+  box-shadow: 0 -20px 100px 0 rgba(101, 53, 138, 0.1);
+  background-color: #fff;
+}
+.footer-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(255, 255, 255, 1) 30%
+  );
+}
+
+.my-box-shadow {
+  position: relative;
+}
+[dir="rtl"] .my-box-shadow img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  top: 50%;
+  left: -28%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.category-section .my-box-shadow:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.category-section .my-box-shadow:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.category-section .my-box-shadow:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.category-section .my-box-shadow {
+  animation: shadowPulse 3s ease-in infinite;
+}
+
+@keyframes shadowPulse {
+  0% {
+    box-shadow: 0 1px 6px -1px rgba(0, 0, 0, 0.1),
+      -5px -1px 1px 1px rgba(0, 0, 0, 0.06);
+  }
+  50% {
+    box-shadow: 0 1px 6px -1px rgba(0, 0, 0, 0.1),
+      5px -3px 1px 1px rgba(0, 0, 0, 0.06);
+  }
+  100% {
+    box-shadow: 0 1px 6px -1px rgba(0, 0, 0, 0.1),
+      2px 3px 0px 1px rgba(0, 0, 0, 0.06);
+  }
+  50% {
+    box-shadow: 0 1px 6px -1px rgba(0, 0, 0, 0.1),
+      5px -3px 1px 1px rgba(0, 0, 0, 0.06);
+  }
+  0% {
+    box-shadow: 0 1px 6px -1px rgba(0, 0, 0, 0.1),
+      -5px -1px 1px 1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.subscription-bg {
+  background-image: url("images/subcription-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  object-fit: fill;
+}
+
+/* Product Card Tailwind Classes */
+.product-card-bg {
+  @apply bg-[#f5f2f8];
+}
+
+.product-card-border {
+  @apply border-[#e5e7eb];
+}
+
+.product-name-color {
+  @apply text-[#222222];
+}
+
+.product-details-color {
+  @apply text-[#616161];
+}
+
+.product-price-color {
+  @apply text-[#222222];
+}
+
+.add-to-cart-bg {
+  @apply bg-[#4c4c4c];
+}
+
+.add-to-cart-hover {
+  @apply bg-[#222222];
+}
+
+.add-to-cart-text {
+  @apply text-white;
+}
