@@ -21,11 +21,11 @@ const ProductList = () => {
       className="min-h-screen flex flex-col items-center p-6 transition-colors duration-300 bg-(--background-color) text-(--text-color)"
     >
       <div className="w-full max-w-[712px] mx-auto pb-8">
-        <div className="flex justify-between items-center gap-3">
+        <div  className="flex justify-between items-center gap-3">
           <div className=" flex-shrink-1">
             <NavigationButton  className='!bg-[#F3EFF6]'/>
           </div>
-          <div className=" mr-auto">
+          <div className="page-title">
             <PageTitle title={categoryName}/>
           </div>
           <div className="">
@@ -36,7 +36,7 @@ const ProductList = () => {
 
       {/* product section  */}
       <div className="product-section flex justify-start max-w-[712px] w-full mx-auto mb-6 px-4 lg:px-0 ">
-        <ProductLabel title={"Products"}/>
+        <ProductLabel title={"Providing Water"}/>
       </div>
 
       {isLoading &&  <Loading />}
@@ -58,7 +58,7 @@ const ProductLabel = ({ title }: { title: string }) => {
   const { t } = useTranslation(); 
   return (
     <div className="text-center">
-      <div className="py-2 px-4 bg-[#222222] font-medium text-[16px] leading-[22px] text-white rounded-xl">
+      <div className="py-2 px-4 bg-(--text-color) font-medium text-base inter leading-[22px] text-white  rounded-xl">
         {t(title)} 
       </div>
     </div>

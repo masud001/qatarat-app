@@ -52,7 +52,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({
               spaceBetween={10}
               slidesPerView={1}
               thumbs={{ swiper: thumbsSwiper }}
-              className="w-[300px] h-[280px] mb-4"
+              className="!py-4 md:!py-0 w-[250px] h-[250px] md:w-[300px] md:h-[280px] mb-4"
             >
               {images.map((img, idx) => (
                 <SwiperSlide key={idx}>
@@ -71,7 +71,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({
                 spaceBetween={10}
                 slidesPerView={2}
                 watchSlidesProgress
-                className="w-[260px] h-[80px]"
+                className="!pb-4 md:!pb-0 w-[260px] h-[80px]"
               >
                 {images.map((img, idx) => (
                   <SwiperSlide key={idx}>
@@ -88,19 +88,19 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({
         )}
       </div>
       {/* Right: Product Details */}
-      <div className="flex-1 flex flex-col gap-4">
+      <div className="flex-1 flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           {/* Product Name */}
-          <h1 className="font-medium text-2xl leading-[28.8px] text-[#222222]">
+          <h1 className="font-medium text-2xl open-sauce-one-medium leading-[28.8px] text-(--text-color)">
             {product.name}
           </h1>
           {/* Size & Quantity */}
           <div className="flex items-center justify-start gap-2">
-            <span className="text-xl font-normal text-[#616161]">
+            <span className="text-xl font-normal text-(--product-details-color) open-sauce-sans">
               {product.size}
             </span>
             <span className="w-1 h-1 rounded-full bg-(--product-details-color)"></span>
-            <span className="text-xl font-normal text-[#616161]">
+            <span className="text-xl font-normal text-(--product-details-color) open-sauce-sans">
               {product.quantity}
             </span>
           </div>
@@ -108,7 +108,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({
           <div className="flex fle-col text-center">
             <div className="flex items-center justify-center gap-1.5 flex-row">
               <img src="/images/price-icon.svg" alt="price icons" />
-              <p className="text-[28px] font-medium leading-[33.6px] text-[#222222]">
+              <p className="text-[28px] open-sauce-one-medium font-medium leading-[33.6px] text-(--text-color)">
                 {product.price}
               </p>
             </div>
@@ -126,23 +126,23 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({
           />
         </div>
         {/* Description */}
-        <div className="flex flex-col gap-3">
-          <h5 className="font-medium text-[16px] text-[#222222] leading-[22.4px]">
+        <div className="flex flex-col gap-2.5">
+          <h5 className="font-medium open-sauce-one-medium text-[16px] text-(--text-color) leading-[22.4px]">
             Product overview
           </h5>
-          <p className="text-base text-[#616161] font-normal">
+          <p className="text-base text-(--product-details-color) font-normal">
             {product.description}
           </p>
         </div>
         {/* Key Features */}
-        <div className="flex flex-col gap-3">
-          <h5 className="font-medium text-[16px] text-[#222222] leading-[22.4px]">
+        <div className="flex flex-col gap-2.5">
+          <h5 className="font-medium open-sauce-one-medium text-[16px] text-(--text-color) leading-[22.4px]">
             Key Features
           </h5>
           {product.keyFeatures && (
             <ul className="list-disc pl-5">
               {product.keyFeatures.map((feature, idx) => (
-                <li key={idx} className="text-base text-[#616161] font-normal">
+                <li key={idx} className="text-base text-(--product-details-color) font-normal">
                   {feature}
                 </li>
               ))}

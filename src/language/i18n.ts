@@ -11,9 +11,9 @@ const resources = {
       back: "Back",
       cart: "Cart",
       categories: {
-       "المساجد مكة": "Makkah Mosques",
-        "مساجد مكة الأكثر": "Most Popular Mosques in Makkah",
-        "سقيا وإطعام الحرم": "Feeding and Watering in Haram",
+        "المساجد مكة": "Makkah Mosques",
+        "مساجد مكة الأكثر": "Mecca mosques most needed",
+        "سقيا وإطعام الحرم": "Watering in Haram",
       },
     },
   },
@@ -27,8 +27,8 @@ const resources = {
       cart: "عربة التسوق",
       categories: {
         "Makkah Mosques": "المساجد مكة",
-        "Most Popular Mosques in Makkah": "مساجد مكة الأكثر",
-        "Feeding and Watering in Haram": "سقيا وإطعام الحرم",
+        "Mecca mosques most needed": "مساجد مكة الأكثر",
+        "Watering in Haram": "سقيا وإطعام الحرم",
       },
     },
   },

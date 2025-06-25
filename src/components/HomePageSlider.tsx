@@ -4,8 +4,6 @@ import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import PrevButton from './sliderElements/PrevButton';
 import NextButton from './sliderElements/NextButton';
-// import 'swiper/css';
-// import 'swiper/css/pagination';
 import "../../node_modules/swiper/swiper-bundle.min.css"
 
 const sliderData = [
@@ -54,15 +52,17 @@ const sliderData = [
 const HomePageSlider = () => {
   const swiperRef = useRef<SwiperType | null>(null);
   return (
-    <div className="home-page-slider  w-full relative">
+    <div className="home-page-slider  w-full relative" dir="ltr">
       <div className="w-full flex justify-between px-5 xl:px-12 absolute z-10 top-1/2 transform -translate-y-2/2">
         <PrevButton swiperRef={swiperRef} />
         <NextButton swiperRef={swiperRef} />
       </div>
       <Swiper
+        dir="ltr"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         modules={[Pagination]}
-        autoplay={true}
+        autoplay
+        loop
         spaceBetween={20}
         slidesPerView={4}
         pagination={{ 

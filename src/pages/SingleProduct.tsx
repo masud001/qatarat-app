@@ -38,7 +38,9 @@ const SingleProduct = () => {
       <div className="w-full max-w-[712px] mx-auto pb-8">
         <div className="flex justify-between items-center gap-3">
           <NavigationButton className="!bg-[#F3EFF6]" />
-          <PageTitle title={"Product Details"} className='mr-auto product-details' />
+          <div className="page-title">
+            <PageTitle title={"Product Details"} className='product-details' />
+          </div>
           <GradientButton
             text=" SAR"
             icon="/images/currency-icon.svg"
@@ -61,8 +63,10 @@ const SingleProduct = () => {
       {suggestedProducts.length > 0 && (
         <div className="w-full max-w-[712px] mx-auto mt-12 flex flex-col gap-4">
           <div className="flex justify-between items-center gap-4">
-            <h3 className="text-[15px] md:text-2xl leading-[33.6px] text-[#000] md:text-[#222222] font-bold md:font-medium">Suggested Similar Products</h3>
-            <NavLink to={product ? `/product-list/${product.categoryId}` : '/'} className="font-normal text-sm md:text-xl text-[#616161] leading-[24px] flex items-center gap-1 hover:underline hover:text-(--active-text-color)"> See All <LiaAngleRightSolid className="ml-1" /> </NavLink>
+            <h3 className="text-[15px] md:text-2xl leading-[33.6px] text-(--text-color) font-bold md:font-medium open-sauce-one-medium">
+              Suggested Similar Products
+            </h3>
+            <NavLink to={product ? `/product-list/${product.categoryId}` : '/'} className="font-normal text-sm md:text-xl inter text-(--see-all-link-color) leading-[24px] flex items-center gap-1 hover:underline hover:text-(--active-text-color)"> See All <LiaAngleRightSolid className="ml-1" /> </NavLink>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {suggestedProducts.map((prod) => (

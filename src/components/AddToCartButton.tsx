@@ -27,7 +27,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
 
   return (
     <button
-      className={`text-[16px] font-medium py-2 px-2 text-center rounded-full w-full cursor-pointer transition ${
+      className={`text-base font-medium inter leading-[22.4px] py-2 px-2 text-center rounded-full w-full cursor-pointer transition ${
         isProductAdded
           ? "bg-(--active-text-color) text-white"
           : "bg-(--add-to-cart-bg) text-(--add-to-cart-text) hover:bg-(--add-to-cart-hover)"

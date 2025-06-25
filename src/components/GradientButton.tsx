@@ -11,9 +11,10 @@ interface ButtonProps {
 const GradientButton: React.FC<ButtonProps> = ({ text, onClick, icon, className, showDropdownIcon }) => {
   return (
     <button
+    dir="ltr"
       onClick={onClick}
       className={`
-        flex items-center justify-center gap-1 py-2 px-3 rounded-full cursor-pointer text-white text-sm font-medium capitalize
+        flex items-center justify-center gap-1 py-2 px-3 rounded-full cursor-pointer text-white text-sm font-medium capitalize open-sauce-one-medium
         bg-gradient-to-r from-[#65358A]  to-[#2B153C]
          transition
         ${className || ""}

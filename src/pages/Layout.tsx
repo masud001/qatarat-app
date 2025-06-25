@@ -2,8 +2,12 @@ import React from "react";
 import { Outlet } from "react-router";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { FaHome, FaShoppingCart, FaClipboardList, FaPhotoVideo, FaUser } from "react-icons/fa"; // Import icons
 import { useGetCartQuery } from "../store/slices/apiSlice";
+import { LuClipboardList } from "react-icons/lu";
+import { PiFilmStripThin } from "react-icons/pi";
+import { IoPersonCircleOutline } from "react-icons/io5";
+import { BsCart } from "react-icons/bs";
+import { RiHome5Fill } from "react-icons/ri";
 
 const Layout: React.FC = () => {
   const { data: cart } = useGetCartQuery();
@@ -13,17 +17,17 @@ const Layout: React.FC = () => {
   const displayCount = cartCount > 0 ? cartCount : undefined;
 
   const footerLinks = [
-    { label: "Home", path: "/", icon: <FaHome className="w-5 h-5 sm:w-7 sm:h-7" /> },
+    { label: "Home", path: "/", icon: <RiHome5Fill className="w-5 h-5 sm:w-7 sm:h-7" /> },
     { 
       label: "Cart", 
       path: "/cart", 
-      icon: <FaShoppingCart className="w-5 h-5 sm:w-7 sm:h-7" />,
+      icon: <BsCart className="w-5 h-5 sm:w-7 sm:h-7" />,
       showCount: true,
       count: displayCount
     },
-    { label: "Order", path: "/order", icon: <FaClipboardList  className="w-5 h-5 sm:w-7 sm:h-7"/> },
-    { label: "Media", path: "/media", icon: <FaPhotoVideo  className="w-5 h-5 sm:w-7 sm:h-7"/> },
-    { label: "Profile", path: "/profile", icon: <FaUser  className="w-5 h-5 sm:w-7 sm:h-7"/> },
+    { label: "Order", path: "/order", icon: <LuClipboardList  className="w-5 h-5 sm:w-7 sm:h-7"/> },
+    { label: "Media", path: "/media", icon: <PiFilmStripThin  className="w-5 h-5 sm:w-7 sm:h-7"/> },
+    { label: "Profile", path: "/profile", icon: <IoPersonCircleOutline  className="w-5 h-5 sm:w-7 sm:h-7"/> },
   ];
   return (
     <>

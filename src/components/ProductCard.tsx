@@ -38,19 +38,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <img src={product.image} alt={product.name} className="w-[134px] rounded" />
         <NavLink 
           to={`/single-product/${product.id}`} 
-          className="text-[16px] leading-[19.2px] font-medium hover:underline transition-colors duration-300 text-(--product-name-color) hover:text-(--product-name-hover)"
+          className="text-base open-sauce-one-medium leading-[19.2px] font-medium hover:underline transition-colors duration-300 text-(--product-name-color) hover:text-(--product-name-hover)"
         >
           {product.name}
         </NavLink>
-        <div className="flex items-center justify-between gap-1 font-normal text-(--product-details-color)">
-          <span className="text-sm font-normal">{product.size}</span>
+        <div className="flex items-center justify-between gap-1 font-normal text-(--product-details-color) ">
+          <span className="text-sm font-normal open-sauce-sans">{product.size}</span>
           <span className='w-1 h-1 rounded-full bg-(--product-details-color)'></span>
-          <span className="text-sm font-normal">{product.quantity}</span>
+          <span className="text-sm font-normal open-sauce-sans">{product.quantity}</span>
         </div>
         <div className="flex fle-col text-center pt-2">
           <div className="flex items-center justify-center gap-1.5 flex-row">
             <img src="/images/price-icon.svg" alt="price icons" />
-            <p className="text-xl font-medium leading-[24px] text-(--product-price-color)">
+            <p className="text-xl font-medium leading-[24px] text-(--product-price-color) open-sauce-one-medium">
               {product.price}
             </p>
           </div>

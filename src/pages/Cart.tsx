@@ -70,7 +70,7 @@ const Cart = () => {
           <div className="flex-shrink-1">
             <NavigationButton className='!bg-[#F3EFF6]' />
           </div>
-          <div className="mr-auto">
+          <div className="page-title">
             <PageTitle title="Cart" />
           </div>
         </div>
@@ -118,7 +118,7 @@ const Cart = () => {
                       <p className="text-sm text-gray-600  mb-2">
                         Size: {product.size} | Quantity: {product.quantity}
                       </p>
-                      <p className="text-lg font-bold text-blue-600 ">
+                      <p className="text-lg font-bold text-(--text-color) ">
                         ${product.price}
                       </p>
                     </div>
@@ -127,7 +127,7 @@ const Cart = () => {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleUpdateQuantity(item.productId, item.quantity - 1)}
-                        className="w-8 h-8 rounded-full bg-gray-200  text-gray-700  hover:bg-gray-300  transition"
+                        className="w-8 h-8 rounded-full bg-[#F3EFF6]  text-gray-700  hover:bg-gray-300  transition cursor-pointer"
                         disabled={item.quantity <= 1}
                       >
                         -
@@ -137,7 +137,7 @@ const Cart = () => {
                       </span>
                       <button
                         onClick={() => handleUpdateQuantity(item.productId, item.quantity + 1)}
-                        className="w-8 h-8 rounded-full bg-gray-200  text-gray-700  hover:bg-gray-300  transition"
+                        className="w-8 h-8 rounded-full bg-[#F3EFF6]  text-gray-700  hover:bg-gray-300  transition cursor-pointer"
                       >
                         +
                       </button>
@@ -146,7 +146,7 @@ const Cart = () => {
                     {/* Remove Button */}
                     <button
                       onClick={() => handleRemoveItem(item.productId)}
-                      className="text-red-500 hover:text-red-700 transition p-2"
+                      className="text-[#c92c2c] hover:text-[#c92c2c] transition p-2"
                       title="Remove item"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

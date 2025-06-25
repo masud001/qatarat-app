@@ -8,7 +8,7 @@ const PrevButton = ({ swiperRef }: SwiperButtonProps) => {
       className="w-10 h-10 p-2 flex items-center justify-center text-(--text-color) rounded-full bg-white border border-(--theme-border-color) cursor-pointer backdrop-blur-xs backdrop-grayscale"
       
     >
-      <GrPrevious />
+      <GrPrevious className="arrow-prev-icon"/>
     </button>
   );
 };
