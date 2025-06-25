@@ -1,5 +1,9 @@
 # Qatarat App
 
+![Lighthouse Performance](assets/screenshot@Screenshot%202025-06-25%20at%2011.19.17%20PM.png)
+
+_Lighthouse performance audit: 99 Performance, 92 Accessibility, 96 Best Practices, 91 SEO_
+
 A modern, responsive e-commerce web application built with **React**, **TypeScript**, **Vite**, **Redux Toolkit**, **TailwindCSS**, and **Swiper**. The app supports multi-language (i18n), dark/light themes, and a modular component structure.
 
 ## Features
