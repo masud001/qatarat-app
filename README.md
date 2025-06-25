@@ -4,7 +4,7 @@
 
 _Lighthouse performance audit: 99 Performance, 92 Accessibility, 96 Best Practices, 91 SEO_
 
-A modern, responsive e-commerce web application built with **React**, **TypeScript**, **Vite**, **Redux Toolkit**, **TailwindCSS**, and **Swiper**. The app supports multi-language (i18n), dark/light themes, and a modular component structure.
+A modern, responsive e-commerce web application built with **React**, **TypeScript**, **Vite**, **Redux Toolkit**, **TailwindCSS**, **Swiper**, and **Formik**. The app supports multi-language (i18n), dark/light themes, and a modular component structure.
 
 ## Features
 
@@ -15,6 +15,7 @@ A modern, responsive e-commerce web application built with **React**, **TypeScri
 - **Responsive UI**: Mobile-first design with TailwindCSS.
 - **Custom Components**: Modular UI components for easy extension.
 - **State Management**: Powered by Redux Toolkit and RTK Query for API calls.
+- **Form Validation**: Robust forms powered by [Formik](https://formik.org/).
 - **Mock API**: Easily switch to real APIs by updating the endpoints.
 - **Notifications**: Notification dropdown in the header.
 - **Subscriptions**: Premium subscription call-to-action.
@@ -118,11 +119,16 @@ qatarat-app/
   npm install swiper
   ```
 
+## Form Validation
+
+- **Formik** is used for building and validating forms. See [Formik documentation](https://formik.org/) for usage details and examples.
+
 ## Customization
 
 - Update categories, products, and API endpoints in `apiSlice.ts`.
 - Add more languages in `src/language/i18n.ts`.
 - Customize theme and styles in `tailwind.config.mjs` and CSS files.
+- Build forms easily with Formik for robust validation and UX.
 
 ## License
 

@@ -66,7 +66,7 @@ const SingleProduct = () => {
             <h3 className="text-[15px] md:text-2xl leading-[33.6px] text-(--text-color) font-bold md:font-medium open-sauce-one-medium">
               Suggested Similar Products
             </h3>
-            <NavLink to={product ? `/product-list/${product.categoryId}` : '/'} className="font-normal text-sm md:text-xl inter text-(--see-all-link-color) leading-[24px] flex items-center gap-1 hover:underline hover:text-(--active-text-color)"> See All <LiaAngleRightSolid className="ml-1" /> </NavLink>
+            <NavLink to={product ? `/product-list/${product.categoryId}` : '/'} className="font-normal text-sm md:text-xl inter text-(--see-all-link-color) leading-[24px] flex items-center gap-1 hover:underline hover:text-(--active-text-color)"> See All <LiaAngleRightSolid className="ml-1 see-all-arrow-icon" /> </NavLink>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {suggestedProducts.map((prod) => (

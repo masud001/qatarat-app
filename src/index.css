@@ -173,7 +173,8 @@ body {
   transform: translate(-50%, -50%);
   position: absolute;
 }
-[dir="rtl"] .back-navigation-arrow {
+[dir="rtl"] .back-navigation-arrow,
+[dir="rtl"] .see-all-arrow-icon {
   rotate: 180deg;
 }
 [dir="rtl"] .page-title,
