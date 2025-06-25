@@ -78,9 +78,9 @@ const Cart = () => {
 
       {cartItems.length === 0 ? (
         <div className="flex flex-col items-center justify-center flex-1">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 max-w-md w-full text-center border border-gray-200 dark:border-gray-700">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Your Cart is Empty</h1>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">Add some products to get started!</p>
+          <div className="bg-white  rounded-xl shadow-lg p-8 max-w-md w-full text-center border border-gray-200 ">
+            <h1 className="text-2xl font-bold text-gray-900  mb-4">Your Cart is Empty</h1>
+            <p className="text-gray-600  mb-6">Add some products to get started!</p>
             <button
               onClick={() => navigate('/product-list')}
               className="bg-(--add-to-cart-bg) text-(--add-to-cart-text) px-6 py-2 rounded-full hover:bg-(--add-to-cart-hover) transition"
@@ -100,25 +100,25 @@ const Cart = () => {
               return (
                 <div
                   key={item.productId}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-700"
+                  className="bg-white  rounded-lg shadow p-6 border border-gray-200 "
                 >
                   <div className="flex items-center gap-4">
                     {/* Product Image */}
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-20 h-20 object-contain rounded bg-gray-100 dark:bg-gray-700"
+                      className="w-20 h-20 object-contain rounded bg-gray-100 "
                     />
                     
                     {/* Product Details */}
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                      <h3 className="text-lg font-semibold text-gray-900 ">
                         {product.name}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                      <p className="text-sm text-gray-600  mb-2">
                         Size: {product.size} | Quantity: {product.quantity}
                       </p>
-                      <p className="text-lg font-bold text-blue-600 dark:text-blue-300">
+                      <p className="text-lg font-bold text-blue-600 ">
                         ${product.price}
                       </p>
                     </div>
@@ -127,17 +127,17 @@ const Cart = () => {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleUpdateQuantity(item.productId, item.quantity - 1)}
-                        className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-500 transition"
+                        className="w-8 h-8 rounded-full bg-gray-200  text-gray-700  hover:bg-gray-300  transition"
                         disabled={item.quantity <= 1}
                       >
                         -
                       </button>
-                      <span className="w-12 text-center font-semibold text-gray-900 dark:text-white">
+                      <span className="w-12 text-center font-semibold text-gray-900 ">
                         {item.quantity}
                       </span>
                       <button
                         onClick={() => handleUpdateQuantity(item.productId, item.quantity + 1)}
-                        className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-500 transition"
+                        className="w-8 h-8 rounded-full bg-gray-200  text-gray-700  hover:bg-gray-300  transition"
                       >
                         +
                       </button>
@@ -160,20 +160,20 @@ const Cart = () => {
           </div>
 
           {/* Cart Summary */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white  rounded-lg shadow p-6 border border-gray-200 ">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Cart Summary</h2>
-              <span className="text-lg font-semibold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-bold text-gray-900 ">Cart Summary</h2>
+              <span className="text-lg font-semibold text-gray-900 ">
                 Total: ${total.toFixed(2)}
               </span>
             </div>
             
             <div className="space-y-3">
-              <div className="flex justify-between text-gray-600 dark:text-gray-300">
+              <div className="flex justify-between text-gray-600 ">
                 <span>Subtotal ({cartItems.length} items)</span>
                 <span>${total.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-gray-600 dark:text-gray-300">
+              <div className="flex justify-between text-gray-600 ">
                 <span>Shipping</span>
                 <span>Free</span>
               </div>
