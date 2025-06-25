@@ -173,13 +173,13 @@ body {
 }
 
 .subscription-bg {
-  background-image: url("images/subcription-bg.svg");
+  background-image: url("./assets/images/subcription-bg.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   object-fit: fill;
 }
-.product-details h2{
+.product-details h2 {
   @apply !text-xl font-bold;
 }
 /* Product Card Tailwind Classes */
