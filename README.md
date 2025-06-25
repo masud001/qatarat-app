@@ -1,6 +1,6 @@
 # Qatarat App
 
-![Lighthouse Performance](assets/screenshot@Screenshot%202025-06-25%20at%2011.19.17%20PM.png)
+![Lighthouse Performance](src/assets/screenshot/Screenshot.png)
 
 _Lighthouse performance audit: 99 Performance, 92 Accessibility, 96 Best Practices, 91 SEO_
 
