@@ -30,9 +30,9 @@ const Layout: React.FC = () => {
       {/* Header */}
       <Header />
       {/* Main Content */}
-      <main className="max-w-[1440px] mx-auto pb-[140px] lg:pb-[172px]">
+      <section className="max-w-[1440px] mx-auto pb-[140px] lg:pb-[172px]">
         <Outlet /> 
-      </main>
+      </section>
 
       <Footer links={footerLinks}  />
       

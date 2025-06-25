@@ -16,7 +16,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ links }) => {
   return (
-    <footer className="fixed z-10 bottom-0 w-full pb-10 md:pb-16 text-center text-sm  backdrop-blur-xs backdrop-grayscale footer-gradient ">
+    <footer className="fixed z-10 bottom-0 left-0 w-full pb-10 md:pb-16 text-center text-sm  backdrop-blur-xs backdrop-grayscale footer-gradient ">
       <div className="max-w-[492px] mx-auto px-4">
         <div className="flex flex-wrap justify-between py-4 px-6 rounded-full footer-box-shadow">
             {links.map((link, index) => (

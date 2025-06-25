@@ -1,8 +1,9 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/thumbs";
+// import "swiper/css";
+// import "swiper/css/thumbs";
+import "../../node_modules/swiper/swiper-bundle.min.css"
 import AddToCartButton from "./AddToCartButton";
 import { Swiper as SwiperType } from 'swiper';
 

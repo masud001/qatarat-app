@@ -88,7 +88,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
   };
 
   return (
-    <div>
+    <div className="mobile-menu-bar">
       {/* Menu Bar Icon */}
       <button
         aria-label="Open menu"
@@ -104,11 +104,11 @@ const MenuBar: React.FC<MenuBarProps> = ({
         <img src="/images/menu-bar-icon.svg" alt="menu-bar" className="w-5 h-5" />
       </button>
 
-      {/* Offcanvas Menu */}
+      {/* Offcanvas Menu hidden for now/ use for future */}
       <div
         role="dialog"
         aria-hidden={!isMenuOpen}
-        className={`fixed ${getVariantClasses()} ${getSizeClasses()} bg-white shadow-lg transition-transform duration-300 z-10 ${getActiveClasses()} ${className}`}
+        className={`fixed ${getVariantClasses()} ${getSizeClasses()} bg-white shadow-lg transition-transform duration-300 z-10 hidden ${getActiveClasses()} ${className}`}
       >
         <div className="p-4 flex justify-between items-center border-b border-gray-200">
           <h2 className="text-lg font-medium">Menu</h2>

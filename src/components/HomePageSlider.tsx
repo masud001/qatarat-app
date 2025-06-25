@@ -4,8 +4,9 @@ import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import PrevButton from './sliderElements/PrevButton';
 import NextButton from './sliderElements/NextButton';
-import 'swiper/css';
-import 'swiper/css/pagination';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+import "../../node_modules/swiper/swiper-bundle.min.css"
 
 const sliderData = [
     {
@@ -61,13 +62,14 @@ const HomePageSlider = () => {
       <Swiper
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         modules={[Pagination]}
+        autoplay={true}
         spaceBetween={20}
         slidesPerView={4}
         pagination={{ 
             clickable: true,
             el: '.custom-swiper-pagination',
             renderBullet: (index, className) => {
-                return `<span class="${className} my-swiper-bullet"></span>`;
+                return `<span data-id="${index}" class="${className} my-swiper-bullet"></span>`;
         }
          }}
         breakpoints={{
