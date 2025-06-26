@@ -7,10 +7,10 @@ interface MenuItem {
 }
 
 interface MenuBarProps {
-  variant?: "left" | "right" | "top" | "bottom"; 
-  className?: string; 
-  width?: string; 
-  isDisabled?: boolean; 
+  variant?: "left" | "right" | "top" | "bottom";
+  className?: string;
+  width?: string;
+  isDisabled?: boolean;
 }
 
 const menuItems: MenuItem[] = [
@@ -30,125 +30,137 @@ const MenuBar: React.FC<MenuBarProps> = ({
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const getVariantClasses = () => {
-    switch (variant) {
-      case "left":
-        return "left-0 top-0 h-full transform";
-      case "right":
-        return "right-0 top-0 h-full transform";
-      case "top":
-        return "top-0 left-0 w-full transform";
-      case "bottom":
-        return "bottom-0 left-0 w-full transform";
-      default:
-        return "";
-    }
+    const variants = {
+      left: "left-0 top-0 h-full transform",
+      right: "right-0 top-0 h-full transform",
+      top: "top-0 left-0 w-full transform",
+      bottom: "bottom-0 left-0 w-full transform",
+    };
+    return variants[variant] || "";
   };
 
   const getSizeClasses = () => {
-    switch (variant) {
-      case "left":
-      case "right":
-        return width; 
-      case "top":
-      case "bottom":
-        return width.replace("w-", "h-"); 
-      default:
-        return "w-64"; 
-    }
+    const sizeMap = {
+      left: width,
+      right: width,
+      top: width.replace("w-", "h-"),
+      bottom: width.replace("w-", "h-"),
+    };
+    return sizeMap[variant] || "w-64";
   };
 
   const getActiveClasses = () => {
-    switch (variant) {
-      case "left":
-        return isMenuOpen ? "translate-x-0" : "-translate-x-full";
-      case "right":
-        return isMenuOpen ? "translate-x-0" : "translate-x-full";
-      case "top":
-        return isMenuOpen ? "translate-y-0" : "-translate-y-full";
-      case "bottom":
-        return isMenuOpen ? "translate-y-0" : "translate-y-full";
-      default:
-        return "";
-    }
+    const activeMap = {
+      left: isMenuOpen ? "translate-x-0" : "-translate-x-full",
+      right: isMenuOpen ? "translate-x-0" : "translate-x-full",
+      top: isMenuOpen ? "translate-y-0" : "-translate-y-full",
+      bottom: isMenuOpen ? "translate-y-0" : "translate-y-full",
+    };
+    return activeMap[variant] || "";
   };
 
   const getCloseIconRotation = () => {
-    switch (variant) {
-      case "left":
-        return "rotate-0";
-      case "right":
-        return "rotate-180";
-      case "top":
-        return "rotate-90";
-      case "bottom":
-        return "-rotate-90";
-      default:
-        return "";
-    }
+    const rotationMap = {
+      left: "rotate-0",
+      right: "rotate-180",
+      top: "rotate-90",
+      bottom: "-rotate-90",
+    };
+    return rotationMap[variant] || "";
   };
 
   return (
     <div className="mobile-menu-bar">
       {/* Menu Bar Icon */}
-      <button
-        aria-label="Open menu"
-        className={`p-[9px] rounded-full bg-[#F3EFF6] border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${
-          isDisabled ? " " : " "
-        }`}
-        onClick={() => {
-          if (!isDisabled) {
-            setMenuOpen(!isMenuOpen);
-          }
-        }}
-      >
-        <img src="/images/menu-bar-icon.svg" alt="menu-bar" className="w-5 h-5" />
-      </button>
+      <MenuBarIcon
+        isDisabled={isDisabled}
+        onClick={() => !isDisabled && setMenuOpen(!isMenuOpen)}
+      />
 
-      {/* Offcanvas Menu hidden for now/ use for future */}
-      <div
-        role="dialog"
-        aria-hidden={!isMenuOpen}
-        className={`fixed ${getVariantClasses()} ${getSizeClasses()} bg-white shadow-lg transition-transform duration-300 z-10 hidden ${getActiveClasses()} ${className}`}
-      >
-        <div className="p-4 flex justify-between items-center border-b border-gray-200">
-          <h2 className="text-lg font-medium">Menu</h2>
-          <button
-            aria-label="Close menu"
-            className={`p-[9px] rounded-full bg-[#F3EFF6] border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${getCloseIconRotation()}`}
-            onClick={() => {
-              if (!isDisabled) {
-                setMenuOpen(false);
-              }
-            }}
-          >
-            <RxCross1 className="w-5 h-5" />
-          </button>
-        </div>
-        <ul className="p-4">
-          {menuItems.map((item, index) => (
-            <li key={index} className="py-2 px-4 hover:bg-gray-100 rounded">
-              <a href={item.href} className="text-sm text-(--text-color) font-medium">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* Offcanvas Menu */}
+      <OffcanvasMenu
+        isMenuOpen={isMenuOpen}
+        variantClasses={getVariantClasses()}
+        sizeClasses={getSizeClasses()}
+        activeClasses={getActiveClasses()}
+        closeIconRotation={getCloseIconRotation()}
+        className={className}
+        onClose={() => !isDisabled && setMenuOpen(false)}
+      />
 
       {/* Overlay */}
       {isMenuOpen && (
-        <div
-          aria-hidden="true"
-          className="fixed inset-0 bg-[#F3EFF6] opacity-75"
-          onClick={() => {
-            if (!isDisabled) {
-              setMenuOpen(false);
-            }
-          }}
-        ></div>
+        <Overlay onClick={() => !isDisabled && setMenuOpen(false)} />
       )}
     </div>
   );
 };
+
+const MenuBarIcon: React.FC<{ isDisabled: boolean; onClick: () => void }> = ({
+  isDisabled,
+  onClick,
+}) => (
+  <button
+    aria-label="Open menu"
+    className={`p-[9px] rounded-full bg-[#F3EFF6] border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${
+      isDisabled ? " " : " "
+    }`}
+    onClick={onClick}
+  >
+    <img src="/images/menu-bar-icon.svg" alt="menu-bar" className="w-5 h-5" />
+  </button>
+);
+
+const OffcanvasMenu: React.FC<{
+  isMenuOpen: boolean;
+  variantClasses: string;
+  sizeClasses: string;
+  activeClasses: string;
+  closeIconRotation: string;
+  className: string;
+  onClose: () => void;
+}> = ({
+  isMenuOpen,
+  variantClasses,
+  sizeClasses,
+  activeClasses,
+  closeIconRotation,
+  className,
+  onClose,
+}) => (
+  <div
+    role="dialog"
+    aria-hidden={!isMenuOpen}
+    className={`fixed ${variantClasses} ${sizeClasses} bg-white shadow-lg transition-transform duration-300 z-10 ${activeClasses} ${className}`}
+  >
+    <div className="p-4 flex justify-between items-center border-b border-gray-200">
+      <h2 className="text-lg font-medium">Menu</h2>
+      <button
+        aria-label="Close menu"
+        className={`p-[9px] rounded-full bg-[#F3EFF6] border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${closeIconRotation}`}
+        onClick={onClose}
+      >
+        <RxCross1 className="w-5 h-5" />
+      </button>
+    </div>
+    <ul className="p-4">
+      {menuItems.map((item, index) => (
+        <li key={index} className="py-2 px-4 hover:bg-gray-100 rounded">
+          <a href={item.href} className="text-sm text-(--text-color) font-medium">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const Overlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
+  <div
+    aria-hidden="true"
+    className="fixed inset-0 bg-[#F3EFF6] opacity-75"
+    onClick={onClick}
+  ></div>
+);
 
 export default MenuBar;

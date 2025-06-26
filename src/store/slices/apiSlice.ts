@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+// Define the API slice
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -11,16 +12,15 @@ export const api = createApi({
   }),
   tagTypes: ["Cart"],
   endpoints: (builder) => ({
+    // Fetch categories
     getCategories: builder.query<
-      Array<{
-        imageUrl: string;
-        id: string;
-        name: string;
-      }>,
+      Array<{ imageUrl: string; id: string; name: string }>,
       void
     >({
       query: () => "categories",
     }),
+
+    // Fetch products
     getProducts: builder.query<
       Array<{
         id: string;
@@ -39,6 +39,8 @@ export const api = createApi({
       query: ({ categoryId }) =>
         categoryId ? `products?categoryId=${categoryId}` : "products",
     }),
+
+    // Fetch a single product
     getProduct: builder.query<
       {
         id: string;
@@ -56,6 +58,8 @@ export const api = createApi({
     >({
       query: (id) => `products/${id}`,
     }),
+
+    // Fetch cart items
     getCart: builder.query<
       Array<{ productId: string; quantity: number }>,
       void
@@ -63,18 +67,17 @@ export const api = createApi({
       query: () => "cart",
       providesTags: ["Cart"],
     }),
+
+    // Add items to the cart
     addToCart: builder.mutation<
       { success: boolean; cart: { productId: string; quantity: number }[] },
       { productId: string; quantity: number }
     >({
-      query: (body) => {
-        console.log("Making addToCart request:", body);
-        return {
-          url: "cart",
-          method: "POST",
-          body,
-        };
-      },
+      query: (body) => ({
+        url: "cart",
+        method: "POST",
+        body,
+      }),
       invalidatesTags: ["Cart"],
       async onQueryStarted(_, { queryFulfilled }) {
         try {
@@ -88,6 +91,7 @@ export const api = createApi({
   }),
 });
 
+// Export hooks for API endpoints
 export const {
   useGetCategoriesQuery,
   useGetProductsQuery,

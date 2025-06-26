@@ -15,23 +15,23 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   isSuccess,
   addedId,
   onAddToCart,
-  className,
+  className = "",
 }) => {
-  const getButtonText = () => {
+  const isProductAdded = isSuccess && addedId === productId;
+
+  const getButtonText = (): string => {
     if (isAdding && addedId === productId) return "Adding...";
-    if (isSuccess && addedId === productId) return "Added!";
+    if (isProductAdded) return "Added!";
     return "Add to Cart";
   };
 
-  const isProductAdded = isSuccess && addedId === productId;
+  const buttonStyles = isProductAdded
+    ? "bg-(--active-text-color) text-white"
+    : "bg-(--add-to-cart-bg) text-(--add-to-cart-text) hover:bg-(--add-to-cart-hover)";
 
   return (
     <button
-      className={`text-base font-medium inter leading-[22.4px] py-2 px-2 text-center rounded-full w-full cursor-pointer transition ${
-        isProductAdded
-          ? "bg-(--active-text-color) text-white"
-          : "bg-(--add-to-cart-bg) text-(--add-to-cart-text) hover:bg-(--add-to-cart-hover)"
-      } ${className || ""}`}
+      className={`text-base font-medium inter leading-[22.4px] py-2 px-2 text-center rounded-full w-full cursor-pointer transition ${buttonStyles} ${className}`}
       onClick={() => onAddToCart(productId)}
       disabled={isAdding && addedId === productId}
     >
