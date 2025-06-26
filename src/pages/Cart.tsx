@@ -146,9 +146,15 @@ const CartItem: React.FC<{
       <div className="flex-1 w-full text-center sm:text-left">
         <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
         <p className="text-sm text-gray-600 mb-2">
-          Size: {product.size} | Quantity: {product.quantity}
+           {product.size} ml |  {product.quantity} bottle
         </p>
-        <p className="text-lg font-bold text-(--text-color)">${product.price}</p>
+        
+        <div className="flex items-center justify-center gap-1.5 flex-row">
+          <img src="/images/price-icon.svg" alt="price icons" loading="lazy" />
+          <p className="text-xl font-medium leading-[24px] text-(--product-price-color) open-sauce-one-medium">
+          {product.price}
+          </p>
+    </div>
       </div>
       <div className="flex flex-row sm:flex-col items-center gap-2 mt-2 sm:mt-0">
         <button
