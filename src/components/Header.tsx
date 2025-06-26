@@ -52,6 +52,7 @@ const HeaderCenter: React.FC = () => (
         className="cursor-pointer"
         src="/images/logo.svg"
         alt="logo"
+        loading="lazy"
       />
     </Link>
   </div>

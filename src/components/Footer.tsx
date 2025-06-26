@@ -44,7 +44,7 @@ const FooterLinkItem: React.FC<{ link: FooterLink }> = ({ link }) => (
         </span>
       )}
     </div>
-    <div className="text-xl font-normal leading-[28px] absolute -bottom-[40px] sm:-bottom-[50px] text-(--text-color) open-sauce-sans">
+    <div className="label text-xl font-normal leading-[28px] absolute -bottom-[40px] sm:-bottom-[50px] text-(--text-color) open-sauce-sans">
       {link.label}
     </div>
   </NavLink>

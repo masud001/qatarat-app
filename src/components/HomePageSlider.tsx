@@ -74,7 +74,7 @@ const SliderItem: React.FC<{ slider: { id: string; title: string; imgUrl: string
   slider,
 }) => (
   <div className="relative">
-    <img className="rounded-3xl" src={slider.imgUrl} alt={`${slider.title} ${slider.id}`} />
+    <img className="rounded-3xl" src={slider.imgUrl} alt={`${slider.title} ${slider.id}`} loading="lazy" />
   </div>
 );
 

@@ -107,7 +107,7 @@ const MenuBarIcon: React.FC<{ isDisabled: boolean; onClick: () => void }> = ({
     }`}
     onClick={onClick}
   >
-    <img src="/images/menu-bar-icon.svg" alt="menu-bar" className="w-5 h-5" />
+    <img src="/images/menu-bar-icon.svg" alt="menu-bar" className="w-5 h-5" loading="lazy" />
   </button>
 );
 

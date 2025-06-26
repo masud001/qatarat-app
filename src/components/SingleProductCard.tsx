@@ -78,6 +78,7 @@ const ProductImageSlider: React.FC<{
                 src={img}
                 alt={productName}
                 className="w-full h-full object-contain rounded-2xl bg-white"
+                loading="lazy"
               />
             </SwiperSlide>
           ))}
@@ -97,6 +98,7 @@ const ProductImageSlider: React.FC<{
                   src={img}
                   alt={productName}
                   className="w-full h-full object-cover rounded-xl p-2 cursor-pointer bg-white"
+                  loading="lazy"
                 />
               </SwiperSlide>
             ))}
@@ -130,7 +132,7 @@ const ProductDetails: React.FC<{
       </div>
       <div className="flex flex-col text-center">
         <div className="flex items-center justify-start gap-1.5 flex-row">
-          <img src="/images/price-icon.svg" alt="price icons" />
+          <img src="/images/price-icon.svg" alt="price icons" loading="lazy" />
           <p className="text-[28px] open-sauce-one-medium font-medium leading-[33.6px] text-(--text-color)">
             {product.price}
           </p>

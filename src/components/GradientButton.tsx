@@ -32,7 +32,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
 const ButtonIcon: React.FC<{ icon: string | React.ReactNode }> = ({ icon }) => (
   <span className="w-4 h-4 flex items-center">
     {typeof icon === "string" ? (
-      <img src={icon} alt="icon" className="w-4 h-4" />
+      <img src={icon} alt="icon" className="w-4 h-4" loading="lazy" />
     ) : (
       icon
     )}

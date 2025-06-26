@@ -70,6 +70,7 @@ const NotificationButtonIcon: React.FC<{
       className="w-5 h-5"
       src="/images/notification-icons.svg"
       alt="Notification icon"
+      loading="lazy"
     />
     {hasNotifications && (
       <span

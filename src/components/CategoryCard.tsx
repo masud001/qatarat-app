@@ -35,7 +35,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ id, name, imageUrl }) => {
 
 const CategoryImage: React.FC<{ imageUrl: string; name: string }> = ({ imageUrl, name }) => (
   <div className="w-9 h-9 sm:w-14 sm:h-14 absolute text-center inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
-    <img src={imageUrl} alt={`Category ${name}`} className="w-full h-full object-contain" />
+    <img src={imageUrl} alt={`Category ${name}`} className="w-full h-full object-contain" loading="lazy" />
   </div>
 );
 

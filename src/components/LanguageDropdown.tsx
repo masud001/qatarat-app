@@ -65,6 +65,7 @@ const DropdownButton: React.FC<{
       src={selectedLang.flag}
       alt={`${selectedLang.code} flag`}
       className="w-5 h-5 rounded-full object-cover"
+      loading="lazy"
     />
     <span className="font-normal text-sm text-(--text-color) leading-[19.6px] open-sauce-sans">
       {selectedLang.label}

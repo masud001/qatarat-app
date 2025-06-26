@@ -49,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 };
 
 const ProductImage: React.FC<{ image: string; name: string }> = ({ image, name }) => (
-  <img src={image} alt={name} className="w-[134px] rounded bg-white p-3" />
+  <img src={image} alt={name} className="w-[134px] rounded bg-white p-3" loading="lazy" />
 );
 
 const ProductDetails: React.FC<{ product: ProductCardProps["product"] }> = ({ product }) => (
@@ -71,7 +71,7 @@ const ProductDetails: React.FC<{ product: ProductCardProps["product"] }> = ({ pr
 const ProductPrice: React.FC<{ price: number }> = ({ price }) => (
   <div className="flex flex-col text-center pt-2 pb-3">
     <div className="flex items-center justify-center gap-1.5 flex-row">
-      <img src="/images/price-icon.svg" alt="price icons" />
+      <img src="/images/price-icon.svg" alt="price icons" loading="lazy" />
       <p className="text-xl font-medium leading-[24px] text-(--product-price-color) open-sauce-one-medium">
         {price}
       </p>

@@ -56,6 +56,7 @@ const BannerSection: React.FC = () => (
         className="w-full h-full absolute top-0 left-0 right-0 bottom-0 object-cover rounded-3xl sm:object-contain"
         src="/images/banner-image.png"
         alt="qatarat app home page banner"
+        loading="lazy"
       />
     </div>
   </div>
@@ -103,6 +104,7 @@ const WhatsAppContact: React.FC = () => (
       <img
         src="/images/whatsapp-icons.svg"
         alt="call to WhatsApp number"
+        loading="lazy"
       />
     </NavLink>
   </div>
