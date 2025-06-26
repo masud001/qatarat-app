@@ -110,7 +110,7 @@ const SuggestedProductsSection: React.FC<SuggestedProductsSectionProps> = ({ sug
           See All <LiaAngleRightSolid className="ml-1 see-all-arrow-icon" />
         </NavLink>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {suggestedProducts.map((prod) => (
           <ProductCard
             key={prod.id}

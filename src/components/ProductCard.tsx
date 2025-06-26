@@ -37,13 +37,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <ProductImage image={product.image} name={product.name} />
       <ProductDetails product={product} />
       <ProductPrice price={product.price} />
-      <AddToCartButton
-        productId={product.id}
-        isAdding={isAdding}
-        isSuccess={isSuccess}
-        addedId={addedId}
-        onAddToCart={handleAddToCart}
-      />
+      <div className="">
+        <AddToCartButton
+          productId={product.id}
+          isAdding={isAdding}
+          isSuccess={isSuccess}
+          addedId={addedId}
+          onAddToCart={handleAddToCart}
+          className="px-6"
+        />
+      </div>
     </div>
   );
 };
