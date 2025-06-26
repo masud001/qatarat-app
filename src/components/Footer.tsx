@@ -16,7 +16,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ links, copyrightText }) => {
   return (
-    <footer className="fixed z-10 bottom-0 left-0 w-full pb-10 md:pb-16 text-center text-sm backdrop-blur-xs backdrop-grayscale footer-gradient">
+    <footer className="fixed z-10 bottom-0 left-0 w-full pb-12 md:pb-16 text-center text-sm backdrop-blur-xs backdrop-grayscale footer-gradient">
       <div className="max-w-[492px] mx-auto px-4">
         <div className="flex flex-wrap justify-between py-4 px-6 rounded-full footer-box-shadow">
           {links.map((link, index) => (
@@ -44,7 +44,7 @@ const FooterLinkItem: React.FC<{ link: FooterLink }> = ({ link }) => (
         </span>
       )}
     </div>
-    <div className="label text-xl font-normal leading-[28px] absolute -bottom-[40px] sm:-bottom-[50px] text-(--text-color) open-sauce-sans">
+    <div className="label text-xl font-normal leading-[28px] absolute -bottom-[50px] sm:-bottom-[60px] text-(--text-color) open-sauce-sans">
       {link.label}
     </div>
   </NavLink>
