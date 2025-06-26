@@ -101,9 +101,7 @@ body {
   color: var(--active-text-color);
   font-weight: 700;
 }
-.nav-link .label{
-  color: var(--active-text-color);
-}
+
 .nav-link.active .label{
   color: var(--active-text-color);
 }
