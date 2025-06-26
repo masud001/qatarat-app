@@ -73,7 +73,7 @@ export default SingleProduct;
 const HeaderSection: React.FC = () => (
   <div className="w-full max-w-[712px] mx-auto pb-8">
     <div className="flex justify-between items-center gap-3">
-      <NavigationButton className="!bg-[#F3EFF6]" />
+      <NavigationButton className="!bg-(--theme-background-color)" />
       <div className="page-title">
         <PageTitle title="Product Details" className="product-details" />
       </div>

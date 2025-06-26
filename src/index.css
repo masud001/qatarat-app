@@ -6,6 +6,7 @@
   --background-color: #ffffff;
   --text-color: #222222;
   --theme-border-color: rgba(101, 53, 138, 0.15);
+  --theme-background-color: #f3eff6;
   --active-text-color: #66358c;
   --theme-color: var(--active-text-color);
   --button-bg-color: #2b153c;

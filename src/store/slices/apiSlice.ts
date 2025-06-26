@@ -20,24 +20,30 @@ export const api = createApi({
       query: () => "categories",
     }),
 
-    // Fetch products
+    // Fetch products (paginated)
     getProducts: builder.query<
-      Array<{
-        id: string;
-        name: string;
-        price: number;
-        image: string;
-        images: string[];
-        categoryId: string;
-        size: string;
-        quantity: string;
-        description: string;
-        keyFeatures: string[];
-      }>,
-      { categoryId?: string }
+      {
+        products: Array<{
+          id: string;
+          name: string;
+          price: number;
+          image: string;
+          images: string[];
+          categoryId: string;
+          size: string;
+          quantity: string;
+          description: string;
+          keyFeatures: string[];
+        }>;
+        total: number;
+      },
+      { categoryId?: string; page?: number; pageSize?: number }
     >({
-      query: ({ categoryId }) =>
-        categoryId ? `products?categoryId=${categoryId}` : "products",
+      query: ({ categoryId, page = 1, pageSize = 10 }) => {
+        let url = `products?page=${page}&pageSize=${pageSize}`;
+        if (categoryId) url += `&categoryId=${categoryId}`;
+        return url;
+      },
     }),
 
     // Fetch a single product

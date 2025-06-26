@@ -3,8 +3,16 @@ import { http, HttpResponse } from "msw";
 // Define categories
 const categories = [
   { id: "1", name: "المساجد مكة", imageUrl: "/images/category/kaaba.png" },
-  { id: "2", name: "مساجد مكة الأكثر", imageUrl: "/images/category/mosque.png" },
-  { id: "3", name: "سقيا وإطعام الحرم", imageUrl: "/images/category/botoll.png" },
+  {
+    id: "2",
+    name: "مساجد مكة الأكثر",
+    imageUrl: "/images/category/mosque.png",
+  },
+  {
+    id: "3",
+    name: "سقيا وإطعام الحرم",
+    imageUrl: "/images/category/botoll.png",
+  },
 ];
 
 // Define product type
@@ -22,7 +30,10 @@ type Product = {
 };
 
 // Helper function to generate products for a category
-const generateProducts = (categoryId: string, categoryName: string): Product[] => {
+const generateProducts = (
+  categoryId: string,
+  categoryName: string
+): Product[] => {
   const baseImage = "/images/product-image.png";
   const images = Array(6).fill(baseImage);
   const keyFeatures = [
@@ -33,7 +44,7 @@ const generateProducts = (categoryId: string, categoryName: string): Product[] =
     "Convenient bulk packaging",
   ];
 
-  return Array.from({ length: 10 }, (_, index) => ({
+  return Array.from({ length: 30 }, (_, index) => ({
     id: `${categoryId}${index + 1}`,
     categoryId,
     name: `5 Cartons`,
@@ -48,7 +59,9 @@ const generateProducts = (categoryId: string, categoryName: string): Product[] =
 };
 
 // Generate products for all categories
-const products = categories.flatMap((category) => generateProducts(category.id, category.name));
+const products = categories.flatMap((category) =>
+  generateProducts(category.id, category.name)
+);
 
 // Define cart
 const cart: { productId: string; quantity: number }[] = [];
@@ -58,29 +71,40 @@ export const handlers = [
   // Get product categories
   http.get("/api/categories", () => HttpResponse.json(categories)),
 
-  // Get product list (optionally filtered by category)
+  // Get product list (optionally filtered by category, paginated)
   http.get("/api/products", ({ request }: { request: Request }) => {
     const url = new URL(request.url);
     const categoryId = url.searchParams.get("categoryId");
+    const page = parseInt(url.searchParams.get("page") || "1", 10);
+    const pageSize = parseInt(url.searchParams.get("pageSize") || "10", 10);
     const filteredProducts = categoryId
       ? products.filter((product) => product.categoryId === categoryId)
       : products;
-    return HttpResponse.json(filteredProducts);
+    const total = filteredProducts.length;
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    const paginatedProducts = filteredProducts.slice(start, end);
+    return HttpResponse.json({ products: paginatedProducts, total });
   }),
 
   // Get single product by ID
-  http.get("/api/products/:id", ({ params }: { params: Record<string, string> }) => {
-    const product = products.find((p) => p.id === params.id);
-    if (!product) {
-      return HttpResponse.json({ error: "Not found" }, { status: 404 });
+  http.get(
+    "/api/products/:id",
+    ({ params }: { params: Record<string, string> }) => {
+      const product = products.find((p) => p.id === params.id);
+      if (!product) {
+        return HttpResponse.json({ error: "Not found" }, { status: 404 });
+      }
+      return HttpResponse.json(product);
     }
-    return HttpResponse.json(product);
-  }),
+  ),
 
   // Add to cart or update cart
   http.post("/api/cart", async ({ request }: { request: Request }) => {
     const { productId, quantity } = await request.json();
-    const existingIndex = cart.findIndex((item) => item.productId === productId);
+    const existingIndex = cart.findIndex(
+      (item) => item.productId === productId
+    );
 
     if (existingIndex !== -1) {
       if (quantity <= 0) {

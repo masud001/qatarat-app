@@ -2,8 +2,8 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
-import PrevButton from "./sliderElements/PrevButton";
-import NextButton from "./sliderElements/NextButton";
+import PrevButton from "./PrevButton";
+import NextButton from "./NextButton";
 import "../../node_modules/swiper/swiper-bundle.min.css";
 
 const sliderData = [

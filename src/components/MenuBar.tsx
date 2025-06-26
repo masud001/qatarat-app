@@ -102,7 +102,7 @@ const MenuBarIcon: React.FC<{ isDisabled: boolean; onClick: () => void }> = ({
 }) => (
   <button
     aria-label="Open menu"
-    className={`p-[9px] rounded-full bg-[#F3EFF6] border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${
+    className={`p-[9px] rounded-full bg-(--theme-background-color) border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${
       isDisabled ? " " : " "
     }`}
     onClick={onClick}
@@ -137,7 +137,7 @@ const OffcanvasMenu: React.FC<{
       <h2 className="text-lg font-medium">Menu</h2>
       <button
         aria-label="Close menu"
-        className={`p-[9px] rounded-full bg-[#F3EFF6] border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${closeIconRotation}`}
+        className={`p-[9px] rounded-full bg-(--theme-background-color) border border-(--theme-border-color) transition-colors duration-200 cursor-pointer ${closeIconRotation}`}
         onClick={onClose}
       >
         <RxCross1 className="w-5 h-5" />
@@ -158,7 +158,7 @@ const OffcanvasMenu: React.FC<{
 const Overlay: React.FC<{ onClick: () => void }> = ({ onClick }) => (
   <div
     aria-hidden="true"
-    className="fixed inset-0 bg-[#F3EFF6] opacity-75"
+    className="fixed inset-0 bg-(--theme-background-color) opacity-75"
     onClick={onClick}
   ></div>
 );

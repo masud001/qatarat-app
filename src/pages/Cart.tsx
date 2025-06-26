@@ -8,22 +8,22 @@ import { useNavigate } from "react-router-dom";
 
 const Cart: React.FC = () => {
   const { data: cart, isLoading: cartLoading, error: cartError } = useGetCartQuery();
-  const { data: products, isLoading: productsLoading } = useGetProductsQuery({});
+  const { data: productsData, isLoading: productsLoading } = useGetProductsQuery({ page: 1, pageSize: 1000 });
+  const products = productsData?.products || [];
   const [addToCart] = useAddToCartMutation();
   const navigate = useNavigate();
 
-  const getProductDetails = (productId: string) => {
-    return products?.find((p) => p.id === productId);
-  };
+  const getProductDetails = (productId: string) => products.find((p) => p.id === productId);
 
   const handleUpdateQuantity = async (productId: string, newQuantity: number) => {
     try {
+      const currentItem = cart?.find((item) => item.productId === productId);
+      const currentQuantity = currentItem?.quantity || 0;
+      const difference = newQuantity - currentQuantity;
+
       if (newQuantity <= 0) {
         await addToCart({ productId, quantity: -9999 }).unwrap();
       } else {
-        const currentItem = cart?.find((item) => item.productId === productId);
-        const currentQuantity = currentItem?.quantity || 0;
-        const difference = newQuantity - currentQuantity;
         await addToCart({ productId, quantity: difference }).unwrap();
       }
     } catch (err) {
@@ -39,39 +39,28 @@ const Cart: React.FC = () => {
     }
   };
 
-  const calculateTotal = () => {
-    if (!cart || !products) return 0;
-    return cart.reduce((total, item) => {
+  const calculateTotal = () =>
+    cart?.reduce((total, item) => {
       const product = getProductDetails(item.productId);
       return total + (product?.price || 0) * item.quantity;
-    }, 0);
-  };
+    }, 0) || 0;
 
   const cartItems = cart?.filter((item) => item.quantity > 0) || [];
   const total = calculateTotal();
 
-  if (cartLoading || productsLoading) {
-    return <Loading />;
-  }
+  const handleCheckout = () => {
+    alert("Proceeding to checkout!");
+  };
 
-  if (cartError) {
-    return <Error message="Failed to load cart." />;
-  }
+  if (cartLoading || productsLoading) return <Loading />;
+  if (cartError) return <Error message="Failed to load cart." />;
 
   return (
     <div
       className="min-h-screen flex flex-col items-center p-6 transition-colors duration-300"
       style={{ backgroundColor: "var(--background-color)", color: "var(--text-color)" }}
     >
-      <div className="w-full max-w-[712px] mx-auto pb-8">
-        <div className="flex justify-between items-center gap-3">
-          <NavigationButton className="!bg-[#F3EFF6]" />
-          <div className="page-title">
-          <PageTitle title="Cart" />
-          </div>
-        </div>
-      </div>
-
+      <HeaderSection />
       {cartItems.length === 0 ? (
         <EmptyCart navigate={navigate} />
       ) : (
@@ -82,7 +71,7 @@ const Cart: React.FC = () => {
             handleUpdateQuantity={handleUpdateQuantity}
             handleRemoveItem={handleRemoveItem}
           />
-          <CartSummary cartItems={cartItems} total={total} />
+          <CartSummary total={total} cartItems={cartItems} handleCheckout={handleCheckout} />
         </div>
       )}
     </div>
@@ -91,9 +80,20 @@ const Cart: React.FC = () => {
 
 export default Cart;
 
+// Header Section Component
+const HeaderSection: React.FC = () => (
+  <div className="w-full max-w-[712px] mx-auto pb-8">
+    <div className="flex justify-between items-center gap-3">
+      <NavigationButton className="!bg-[#F3EFF6]" />
+      <div className="page-title">
+      <PageTitle title="Cart" />
+      </div>
+    </div>
+  </div>
+);
 
-
-const EmptyCart: React.FC<{ navigate: (path: string) => void }> = ({ navigate }) => (
+// Empty Cart Component
+const EmptyCart: React.FC<{ navigate: ReturnType<typeof useNavigate> }> = ({ navigate }) => (
   <div className="flex flex-col items-center justify-center flex-1">
     <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full text-center border border-gray-200">
       <h1 className="text-2xl font-bold text-gray-900 mb-4">Your Cart is Empty</h1>
@@ -108,20 +108,13 @@ const EmptyCart: React.FC<{ navigate: (path: string) => void }> = ({ navigate })
   </div>
 );
 
-
-interface CartItemsProps {
+// Cart Items Component
+const CartItems: React.FC<{
   cartItems: Array<{ productId: string; quantity: number }>;
-  getProductDetails: (productId: string) => { id: string; name: string; image: string; size: string; price: number } | undefined;
+  getProductDetails: (productId: string) => { id: string; name: string; price: number; image: string; size: string } | undefined;
   handleUpdateQuantity: (productId: string, newQuantity: number) => void;
   handleRemoveItem: (productId: string) => void;
-}
-
-const CartItems: React.FC<CartItemsProps> = ({
-  cartItems,
-  getProductDetails,
-  handleUpdateQuantity,
-  handleRemoveItem,
-}) => (
+}> = ({ cartItems, getProductDetails, handleUpdateQuantity, handleRemoveItem }) => (
   <div className="space-y-4">
     {cartItems.map((item) => {
       const product = getProductDetails(item.productId);
@@ -130,7 +123,7 @@ const CartItems: React.FC<CartItemsProps> = ({
       return (
         <CartItem
           key={item.productId}
-          product={product}
+          product={{ ...product, quantity: item.quantity.toString() }}
           quantity={item.quantity}
           handleUpdateQuantity={handleUpdateQuantity}
           handleRemoveItem={handleRemoveItem}
@@ -140,43 +133,27 @@ const CartItems: React.FC<CartItemsProps> = ({
   </div>
 );
 
-
-
-interface CartItemProps {
-  product: {
-    id: string;
-    name: string;
-    image: string;
-    size: string;
-    price: number;
-  };
+// Cart Item Component
+const CartItem: React.FC<{
+  product: { id: string; name: string; price: number; image: string; size: string; quantity: string };
   quantity: number;
   handleUpdateQuantity: (productId: string, newQuantity: number) => void;
   handleRemoveItem: (productId: string) => void;
-}
-
-const CartItem: React.FC<CartItemProps> = ({
-  product,
-  quantity,
-  handleUpdateQuantity,
-  handleRemoveItem,
-}) => (
+}> = ({ product, quantity, handleUpdateQuantity, handleRemoveItem }) => (
   <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
     <div className="flex items-center gap-4">
-      <img
-        src={product.image}
-        alt={product.name}
-        className="w-20 h-20 object-contain rounded bg-gray-100"
-      />
+      <img src={product.image} alt={product.name} className="w-20 h-20 object-contain rounded bg-gray-100" />
       <div className="flex-1">
         <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
-        <p className="text-sm text-gray-600 mb-2">Size: {product.size}</p>
+        <p className="text-sm text-gray-600 mb-2">
+          Size: {product.size} | Quantity: {product.quantity}
+        </p>
         <p className="text-lg font-bold text-(--text-color)">${product.price}</p>
       </div>
       <div className="flex items-center gap-2">
         <button
           onClick={() => handleUpdateQuantity(product.id, quantity - 1)}
-          className="w-8 h-8 rounded-full bg-[#F3EFF6] text-gray-700 hover:bg-gray-300 transition cursor-pointer"
+          className="w-8 h-8 rounded-full bg-(--theme-background-color) text-(--text-color) hover:bg-(--theme-color) cursor-pointer hover:text-white transition"
           disabled={quantity <= 1}
         >
           -
@@ -184,36 +161,30 @@ const CartItem: React.FC<CartItemProps> = ({
         <span className="w-12 text-center font-semibold text-gray-900">{quantity}</span>
         <button
           onClick={() => handleUpdateQuantity(product.id, quantity + 1)}
-          className="w-8 h-8 rounded-full bg-[#F3EFF6] text-gray-700 hover:bg-gray-300 transition cursor-pointer"
+          className="w-8 h-8 rounded-full bg-(--theme-background-color) text-(--text-color) hover:bg-(--theme-color) cursor-pointer hover:text-white transition"
         >
           +
         </button>
       </div>
       <button
         onClick={() => handleRemoveItem(product.id)}
-        className="text-[#c92c2c] hover:text-[#c92c2c] transition p-2"
+        className="text-red-500 hover:text-red-700 transition p-2"
         title="Remove item"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>
       </button>
     </div>
   </div>
 );
 
-
-interface CartSummaryProps {
-  cartItems: Array<{ productId: string; quantity: number }>;
+// Cart Summary Component
+const CartSummary: React.FC<{
   total: number;
-}
-
-const CartSummary: React.FC<CartSummaryProps> = ({ cartItems, total }) => (
+  cartItems: Array<{ productId: string; quantity: number }>;
+  handleCheckout: () => void;
+}> = ({ total, cartItems, handleCheckout }) => (
   <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
     <div className="flex justify-between items-center mb-4">
       <h2 className="text-xl font-bold text-gray-900">Cart Summary</h2>
@@ -235,10 +206,10 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems, total }) => (
       </div>
     </div>
     <button
-      className="w-full mt-6 bg-(--add-to-cart-bg) text-(--add-to-cart-text) py-3 px-6 rounded-full font-semibold hover:bg-(--add-to-cart-hover) transition"
+      className="w-full mt-6 bg-(--add-to-cart-bg) text-(--add-to-cart-text) py-3 px-6 rounded-full font-semibold hover:bg-(--add-to-cart-hover) transition cursor-pointer"
+      onClick={handleCheckout}
     >
       Proceed to Checkout
     </button>
   </div>
 );
-

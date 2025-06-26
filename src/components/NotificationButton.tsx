@@ -60,7 +60,7 @@ const NotificationButtonIcon: React.FC<{
 }> = ({ hasNotifications, isDropdownDisabled, onClick }) => (
   <button
     aria-label="Toggle notifications dropdown"
-    className={`bg-[#F3EFF6] p-2.5 rounded-full relative cursor-pointer ${
+    className={`bg-(--theme-background-color) p-2.5 rounded-full relative cursor-pointer ${
       isDropdownDisabled ? " " : " "
     }`}
     onClick={onClick}

@@ -20,7 +20,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ id, name, imageUrl }) => {
 
   return (
     <div
-      className="w-[100px] h-[100px] min-[550px]:w-[150px] min-[550px]:h-[150px] sm:w-[200px] sm:h-[200px] bg-white rounded-full my-box-shadow p-4 relative cursor-pointer hover:bg-[#f3eff6] transition-colors duration-200"
+      className="w-[100px] h-[100px] min-[550px]:w-[150px] min-[550px]:h-[150px] sm:w-[200px] sm:h-[200px] bg-white rounded-full my-box-shadow p-4 relative cursor-pointer hover:bg-(--theme-background-color) transition-colors duration-200"
       onClick={handleNavigation}
       role="button"
       tabIndex={0}
