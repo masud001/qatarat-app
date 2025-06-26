@@ -140,17 +140,17 @@ const CartItem: React.FC<{
   handleUpdateQuantity: (productId: string, newQuantity: number) => void;
   handleRemoveItem: (productId: string) => void;
 }> = ({ product, quantity, handleUpdateQuantity, handleRemoveItem }) => (
-  <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
-    <div className="flex items-center gap-4">
+  <div className="bg-white rounded-lg shadow p-4 sm:p-6 border border-gray-200">
+    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
       <img src={product.image} alt={product.name} className="w-20 h-20 object-contain rounded bg-gray-100" />
-      <div className="flex-1">
+      <div className="flex-1 w-full text-center sm:text-left">
         <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
         <p className="text-sm text-gray-600 mb-2">
           Size: {product.size} | Quantity: {product.quantity}
         </p>
         <p className="text-lg font-bold text-(--text-color)">${product.price}</p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-row sm:flex-col items-center gap-2 mt-2 sm:mt-0">
         <button
           onClick={() => handleUpdateQuantity(product.id, quantity - 1)}
           className="w-8 h-8 rounded-full bg-(--theme-background-color) text-(--text-color) hover:bg-(--theme-color) cursor-pointer hover:text-white transition"
@@ -168,7 +168,7 @@ const CartItem: React.FC<{
       </div>
       <button
         onClick={() => handleRemoveItem(product.id)}
-        className="text-red-500 hover:text-red-700 transition p-2"
+        className="text-red-500 hover:text-red-700 transition p-2 mt-2 sm:mt-0"
         title="Remove item"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
