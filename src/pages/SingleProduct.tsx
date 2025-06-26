@@ -117,8 +117,8 @@ const SuggestedProductsSection: React.FC<SuggestedProductsSectionProps> = ({ sug
             product={{
               ...prod,
               image: prod.imageUrl, // Map imageUrl to image
-              size: "Default Size", // Provide a default size
-              quantity: "1", // Provide a default quantity
+              size: "330 ml", // Provide a default size
+              quantity: "20 bottle", // Provide a default quantity
               description: "No description available", // Provide a default description
             }}
           />

@@ -233,9 +233,13 @@ body {
   background-size: cover;
   object-fit: fill;
 }
-.product-details h2 {
-  @apply !text-xl font-bold;
+
+@media (max-width: 768px) {
+  .product-details h2 {
+    @apply !text-xl font-bold;
+  }
 }
+
 /* Product Card Tailwind Classes */
 .product-card-bg {
   @apply bg-[#f5f2f8];
