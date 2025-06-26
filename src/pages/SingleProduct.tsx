@@ -29,7 +29,7 @@ const SingleProduct: React.FC = () => {
   };
 
   // Filter out the current product and take up to 4 similar products
-  const suggestedProducts = (similarProducts || [])
+  const suggestedProducts = (similarProducts?.products || [])
     .filter((p) => p.id !== productId)
     .slice(0, 4);
 
@@ -44,24 +44,24 @@ const SingleProduct: React.FC = () => {
 
       {/* Product Details */}
       {product && (
-        <SingleProductCard
-          product={product}
-          isAdding={isAdding}
-          isSuccess={isSuccess}
-          addedId={product.id}
-          onAddToCart={handleAddToCart}
-        />
+      <SingleProductCard
+        product={product}
+        isAdding={isAdding}
+        isSuccess={isSuccess}
+        addedId={product.id}
+        onAddToCart={handleAddToCart}
+      />
       )}
 
       {/* Suggested Similar Products Section */}
       <SuggestedProductsSection 
-        suggestedProducts={suggestedProducts.map((prod) => ({
-          id: prod.id,
-          name: prod.name,
-          price: prod.price,
-          imageUrl: prod.image, // Map image to imageUrl
-        }))} 
-        categoryId={product?.categoryId} 
+      suggestedProducts={suggestedProducts.map((prod: { id: string; name: string; price: number; image: string }) => ({
+        id: prod.id,
+        name: prod.name,
+        price: prod.price,
+        imageUrl: prod.image, // Map image to imageUrl
+      }))} 
+      categoryId={product?.categoryId} 
       />
     </div>
   );

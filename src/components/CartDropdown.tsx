@@ -12,7 +12,7 @@ const CartDropdown: React.FC = () => {
   const cartCount = cart ? cart.reduce((sum, item) => sum + item.quantity, 0) : 0;
 
   const getProductName = (productId: string) => {
-    return products?.find((p) => p.id === productId)?.name || productId;
+    return products?.products.find((p) => p.id === productId)?.name || productId;
   };
 
   const handleDelete = async (productId: string) => {
