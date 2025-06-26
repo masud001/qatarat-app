@@ -43,7 +43,7 @@ export default ProductList;
 const HeaderSection: React.FC<{ categoryName: string }> = ({ categoryName }) => (
   <div className="w-full max-w-[712px] mx-auto pb-8">
     <div className="flex justify-between items-center gap-3">
-      <NavigationButton className="!bg-(--theme-background-color)" />
+      <NavigationButton className="!bg-(--theme-background-color) shrink-0" />
       <PageTitle title={categoryName} />
       <GradientButton text="SAR" icon="/images/currency-icon.svg" showDropdownIcon={true} />
     </div>

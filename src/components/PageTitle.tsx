@@ -15,7 +15,7 @@ const PageTitle: React.FC<PageTitleProps> = ({ title, className = "" }) => {
 
   return (
     <div className={className}>
-      <h2 className="text-2xl md:text-[40px] font-bold text-(--text-color) leading-[48px] open-sauce-one-bold">
+      <h2 className="text-2xl md:text-[40px] font-bold text-(--text-color) md:leading-[48px] open-sauce-one-bold">
         {translatedTitle}
       </h2>
     </div>
